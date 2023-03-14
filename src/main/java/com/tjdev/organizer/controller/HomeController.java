@@ -4,10 +4,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class demoController {
+public class HomeController {
 
     @GetMapping("/demo")
     public String demoPage(){
         return "hello ther!";
     }
+
+
 }
