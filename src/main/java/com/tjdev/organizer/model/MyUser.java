@@ -18,6 +18,15 @@ public class MyUser {
     private String username;
     private String password;
 
+    private String roles;
+
+    public MyUser(String username, String password){
+        this.username = username;
+        this.password = password;
+        this.roles = "admin";
+        this.taskCategories = new ArrayList<>();
+    }
+
     public MyUser() {
         this.taskCategories = new ArrayList<>();
     }
@@ -54,11 +63,22 @@ public class MyUser {
         this.password = password;
     }
 
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "MyUser{" +
                 "id='" + id + '\'' +
                 ", taskCategories=" + taskCategories +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

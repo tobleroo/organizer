@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.tjdev.organizer.UserDetailsService.MongoUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,8 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -26,36 +29,41 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-
-import static org.springframework.security.config.Customizer.*;
-
 @Configuration
 @EnableWebSecurity
 public class securityConfig {
 
     private final RsaKeyProperties rsaKeys;
+    private final MongoUserDetailService mongoUserDetailService;
 
-    public securityConfig(RsaKeyProperties rsaKeys) {
+    public securityConfig(RsaKeyProperties rsaKeys, MongoUserDetailService mongoUserDetailService) {
         this.rsaKeys = rsaKeys;
+        this.mongoUserDetailService = mongoUserDetailService;
     }
 
     @Bean
-    public AuthenticationManager authManager(UserDetailsService userDetailsService){
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(MongoUserDetailService mongoUserDetailService){
         var authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(mongoUserDetailService);
+        authProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authProvider);
     }
 
 
-    @Bean
-    public InMemoryUserDetailsManager users() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("tojaks")
-                        .password("{noop}password")
-                        .authorities("read")
-                        .build()
-        );
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager users() {
+//        return new InMemoryUserDetailsManager(
+//                User.withUsername("tojaks")
+//                        .password("{noop}password")
+//                        .authorities("read")
+//                        .build()
+//        );
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,9 +71,10 @@ public class securityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/token").permitAll()
+                        .requestMatchers("/token", "/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
+//                .userDetailsService(mongoUserDetailService);
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
