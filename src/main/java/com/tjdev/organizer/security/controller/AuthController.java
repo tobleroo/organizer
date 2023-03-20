@@ -1,8 +1,8 @@
-package com.tjdev.organizer.controller;
+package com.tjdev.organizer.security.controller;
 
 
-import com.tjdev.organizer.model.LoginReq;
-import com.tjdev.organizer.service.TokenService;
+import com.tjdev.organizer.security.model.LoginReq;
+import com.tjdev.organizer.security.service.TokenService;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+//    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;

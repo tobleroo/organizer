@@ -1,4 +1,4 @@
-package com.tjdev.organizer.config;
+package com.tjdev.organizer.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,5 +1,6 @@
-package com.tjdev.organizer.model;
+package com.tjdev.organizer.security.model;
 
+import com.tjdev.organizer.model.MyUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

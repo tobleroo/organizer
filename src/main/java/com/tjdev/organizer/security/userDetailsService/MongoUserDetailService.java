@@ -1,7 +1,7 @@
-package com.tjdev.organizer.UserDetailsService;
+package com.tjdev.organizer.security.userDetailsService;
 
 import com.tjdev.organizer.repository.UserRepository;
-import com.tjdev.organizer.model.SecurityUser;
+import com.tjdev.organizer.security.model.SecurityUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package com.tjdev.organizer.service;
+package com.tjdev.organizer.security.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

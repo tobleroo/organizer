@@ -1,4 +1,4 @@
-package com.tjdev.organizer.config;
+package com.tjdev.organizer.security.config;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -6,7 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.tjdev.organizer.UserDetailsService.MongoUserDetailService;
+import com.tjdev.organizer.security.userDetailsService.MongoUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,15 +18,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -34,11 +31,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class securityConfig {
 
     private final RsaKeyProperties rsaKeys;
-    private final MongoUserDetailService mongoUserDetailService;
 
-    public securityConfig(RsaKeyProperties rsaKeys, MongoUserDetailService mongoUserDetailService) {
+    public securityConfig(RsaKeyProperties rsaKeys) {
         this.rsaKeys = rsaKeys;
-        this.mongoUserDetailService = mongoUserDetailService;
     }
 
     @Bean
@@ -54,17 +49,6 @@ public class securityConfig {
         return new ProviderManager(authProvider);
     }
 
-
-//    @Bean
-//    public InMemoryUserDetailsManager users() {
-//        return new InMemoryUserDetailsManager(
-//                User.withUsername("tojaks")
-//                        .password("{noop}password")
-//                        .authorities("read")
-//                        .build()
-//        );
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -74,7 +58,6 @@ public class securityConfig {
                         .requestMatchers("/token", "/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .userDetailsService(mongoUserDetailService);
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
@@ -93,3 +76,14 @@ public class securityConfig {
     }
 
 }
+
+// in case I need to try something else
+//    @Bean
+//    public InMemoryUserDetailsManager users() {
+//        return new InMemoryUserDetailsManager(
+//                User.withUsername("tojaks")
+//                        .password("{noop}password")
+//                        .authorities("read")
+//                        .build()
+//        );
+//    }

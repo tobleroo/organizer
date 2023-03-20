@@ -2,7 +2,6 @@ package com.tjdev.organizer.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +26,9 @@ public class MyUser {
         this.taskCategories = new ArrayList<>();
     }
 
-    public MyUser() {
-        this.taskCategories = new ArrayList<>();
-    }
+//    public MyUser() {
+//        this.taskCategories = new ArrayList<>();
+//    }
 
     public List<TaskCategories> getTaskCategories() {
         return taskCategories;
