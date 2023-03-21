@@ -24,6 +24,7 @@ public class MyUser {
         this.password = password;
         this.roles = "admin";
         this.taskCategories = new ArrayList<>();
+        this.taskCategories.add(new TaskCategories("unnamed"));
     }
 
 //    public MyUser() {

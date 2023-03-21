@@ -5,12 +5,12 @@ import java.util.List;
 
 public class TaskCategories {
 
-    private String taskCategory;
+    private String taskCategoryName;
 
     private List<Task> listOfTasks;
 
-    public TaskCategories(String taskCategory) {
-        this.taskCategory = taskCategory;
+    public TaskCategories(String taskCategoryName) {
+        this.taskCategoryName = taskCategoryName;
         listOfTasks = new ArrayList<>();
     }
 
@@ -18,12 +18,12 @@ public class TaskCategories {
         listOfTasks = new ArrayList<>();
     }
 
-    public String getTaskCategory() {
-        return taskCategory;
+    public String getTaskCategoryName() {
+        return taskCategoryName;
     }
 
-    public void setTaskCategory(String taskCategory) {
-        this.taskCategory = taskCategory;
+    public void setTaskCategoryName(String taskCategoryName) {
+        this.taskCategoryName = taskCategoryName;
     }
 
     public List<Task> getListOfTasks() {
@@ -37,7 +37,7 @@ public class TaskCategories {
     @Override
     public String toString() {
         return "TaskCategories{" +
-                "taskCategory='" + taskCategory + '\'' +
+                "taskCategory='" + taskCategoryName + '\'' +
                 ", listOfTasks=" + listOfTasks +
                 '}';
     }
