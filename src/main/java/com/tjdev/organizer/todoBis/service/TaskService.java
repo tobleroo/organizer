@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -41,5 +42,15 @@ public class TaskService {
             }
         }
         userRepository.save(user);
+    }
+
+    public List<TaskCategories> retrieveAllTasks(MyUser user){
+        return user.getTaskCategories().stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public MyUser retrieveUser(String username){
+        return userRepository.findByUsername(username).get();
     }
 }

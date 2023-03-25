@@ -24,4 +24,12 @@ public class Task {
     public void setDone(Boolean done) {
         this.done = done;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "activity='" + activity + '\'' +
+                ", done=" + done +
+                '}';
+    }
 }
