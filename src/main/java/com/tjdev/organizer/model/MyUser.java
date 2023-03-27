@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Document("userdata")
@@ -12,7 +13,7 @@ public class MyUser {
     @Id
     private String id;
 
-    private List<TaskCategories> taskCategories;
+    private HashMap<String, List<Task>> taskCategories;
 
     private String username;
     private String password;
@@ -23,21 +24,16 @@ public class MyUser {
         this.username = username;
         this.password = password;
         this.roles = "admin";
-        this.taskCategories = new ArrayList<>();
-        this.taskCategories.add(new TaskCategories("unnamed"));
+        this.taskCategories = new HashMap<>();
+        ArrayList<Task> unnamedTaskList = new ArrayList<>();
+        this.taskCategories.put("unnamed", unnamedTaskList );
     }
 
 //    public MyUser() {
 //        this.taskCategories = new ArrayList<>();
 //    }
 
-    public List<TaskCategories> getTaskCategories() {
-        return taskCategories;
-    }
 
-    public void setTaskCategories(List<TaskCategories> taskCategories) {
-        this.taskCategories = taskCategories;
-    }
 
     public String getId() {
         return id;
@@ -69,6 +65,14 @@ public class MyUser {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public HashMap<String, List<Task>> getTaskCategories() {
+        return taskCategories;
+    }
+
+    public void setTaskCategories(HashMap<String, List<Task>> taskCategories) {
+        this.taskCategories = taskCategories;
     }
 
     @Override

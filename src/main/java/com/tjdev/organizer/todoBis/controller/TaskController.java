@@ -20,13 +20,13 @@ public class TaskController {
 
     @PostMapping("/categorie")
     public String addCategorie(@RequestBody String listName, Principal principal){
-        taskService.addActivityList(listName, principal.getName());
+        taskService.addNewTaskCategory(principal.getName(), listName);
         return "should work";
     }
 
     @PostMapping("/task")
     public String addTask(@RequestBody TaskReq taskReq, Principal principal){
-        taskService.addTaskToList(principal.getName(), taskReq);
+        taskService.addNewTask(taskReq, principal.getName());
         return "should work";
     }
 
@@ -34,10 +34,11 @@ public class TaskController {
     public String seeAllActivities(Principal principal){
         MyUser user = taskService.retrieveUser(principal.getName());
 
-        return user.getTaskCategories().stream()
-                .flatMap(act -> act.getListOfTasks().stream())
-                .toList().toString();
+//        return user.getTaskCategories().stream()
+//                .flatMap(act -> act.getListOfTasks().stream())
+//                .toList().toString();
 
 //        return user.getTaskCategories().toString();
+        return "currently wrong";
     }
 }
