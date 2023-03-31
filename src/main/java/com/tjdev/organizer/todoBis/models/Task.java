@@ -1,4 +1,4 @@
-package com.tjdev.organizer.model;
+package com.tjdev.organizer.todoBis.models;
 
 public class Task {
 

@@ -1,5 +1,7 @@
 package com.tjdev.organizer.model;
 
+import com.tjdev.organizer.todoBis.models.Task;
+import com.tjdev.organizer.todoBis.models.ToDoItem;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +14,8 @@ public class MyUser {
 
     @Id
     private String id;
+
+    private ArrayList<ToDoItem> todoList;
 
     private HashMap<String, List<Task>> taskCategories;
 
@@ -27,6 +31,7 @@ public class MyUser {
         this.taskCategories = new HashMap<>();
         ArrayList<Task> unnamedTaskList = new ArrayList<>();
         this.taskCategories.put("unnamed", unnamedTaskList );
+        this.todoList = new ArrayList<>();
     }
 
 //    public MyUser() {
@@ -84,5 +89,13 @@ public class MyUser {
                 ", password='" + password + '\'' +
                 ", roles='" + roles + '\'' +
                 '}';
+    }
+
+    public ArrayList<ToDoItem> getTodoList() {
+        return todoList;
+    }
+
+    public void setTodoList(ArrayList<ToDoItem> todoList) {
+        this.todoList = todoList;
     }
 }

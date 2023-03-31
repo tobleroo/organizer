@@ -1,16 +1,12 @@
 package com.tjdev.organizer.todoBis.service;
 
 import com.tjdev.organizer.model.MyUser;
-import com.tjdev.organizer.model.Task;
+import com.tjdev.organizer.todoBis.models.Task;
 import com.tjdev.organizer.repository.UserRepository;
 import com.tjdev.organizer.todoBis.models.TaskReq;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskService {

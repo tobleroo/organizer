@@ -1,11 +1,5 @@
 package com.tjdev.organizer;
 
-import com.tjdev.organizer.model.MyUser;
-import com.tjdev.organizer.model.Task;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 //public class StreamsTests {
 
 //    private List<Task> taskListOne = List.of(new Task("actOne","description is here", 20),
