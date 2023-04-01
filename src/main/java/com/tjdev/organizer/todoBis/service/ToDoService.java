@@ -12,11 +12,11 @@ import java.util.List;
 @Service
 public class ToDoService {
 
-//    private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-//    public ToDoService(UserRepository userRepository) {
-////        this.userRepository = userRepository;
-//    }
+    public ToDoService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<ToDoItem> retrieveTodoList(MyUser user){
         return user.getTodoList().stream()

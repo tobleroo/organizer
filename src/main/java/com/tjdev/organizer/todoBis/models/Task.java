@@ -3,27 +3,30 @@ package com.tjdev.organizer.todoBis.models;
 public class Task {
 
     private String activityName, description;
-    private int timesCompleted, timeToPerform;
+    private int timesCompleted, timeToPerform, frequencyDays;
 
-    public Task(String activityName) {
+    public Task(String activityName, int frequencyDays) {
         this.activityName = activityName;
         this.description = "No description";
         this.timeToPerform = 0;
         this.timesCompleted = 0;
+        this.frequencyDays = frequencyDays;
     }
 
-    public Task(String activityName, String description){
+    public Task(String activityName, String description, int frequencyDays){
         this.activityName = activityName;
         this.description = description;
         this.timesCompleted = 0;
         this.timeToPerform = 0;
+        this.frequencyDays = frequencyDays;
     }
 
-    public Task(String activityName, String description, int timeToPerform){
+    public Task(String activityName, String description, int timeToPerform, int frequencyDays){
         this.activityName = activityName;
         this.description = description;
         this.timeToPerform = timeToPerform;
         this.timesCompleted = 0;
+        this.frequencyDays = frequencyDays;
     }
 
     public String getActivityName() {

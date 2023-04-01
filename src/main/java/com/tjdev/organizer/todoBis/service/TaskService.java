@@ -32,12 +32,14 @@ public class TaskService {
         user.getTaskCategories().get(requestData.list())
                 .add(new Task(requestData.taskName(),
                         requestData.description(),
-                        requestData.timeToDo()));
+                        requestData.timeToDo(),
+                        requestData.frequency()));
 
         userRepository.save(user);
     }
 
-    public MyUser retrieveUser(String username){
-        return userRepository.findByUsername(username).get();
-    }
+//    public MyUser retrieveUser(String username){
+//        return userRepository.findByUsername(username).get();
+//    }
+
 }
