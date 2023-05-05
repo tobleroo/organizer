@@ -1,4 +1,4 @@
-Project Name
+#spring auth jwt
 This project is a Java 17 Spring Framework application that implements a security module to manage JWT access tokens.
 The application is designed to allow users to create and sign in to user accounts.
 
